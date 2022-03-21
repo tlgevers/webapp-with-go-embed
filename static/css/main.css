@@ -1,5 +1,8 @@
-body{
+body {
   background-color: black;
   color: white;
-  text-align: center;
+}
+
+.main-header {
+  margin-left: 5px;
 }

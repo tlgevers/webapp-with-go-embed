@@ -44,7 +44,7 @@ func main() {
 		t.Execute(w, struct {
 			Title    string
 			Response string
-		}{Title: title, Response: path})
+		}{Title: "MACS-Sbx", Response: ""})
 
 	})
 

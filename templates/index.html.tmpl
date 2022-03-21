@@ -1,10 +1,75 @@
 <html>
-  <head>
-    <title>{{.Title}}</title>
-    <link rel="stylesheet" href="static/css/main.css">
-  </head>
-  <body>
-    <p>{{.Response}}</p>
-    <p>Powered by // go:embed</p>
-  </body>
+    <head>
+        <title>{{.Title}}</title>
+        <link rel="stylesheet" href="static/css/main.css">
+        <link type="text/css" rel="stylesheet" href="static/css/materialize.min.css"  media="screen,projection"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <nav class="blue accent-2">
+            <div class="main-header nav-wrapper blue lighten-4">
+                <a href="#" class="brand-logo indigo-text text-darken-4 m5 center">MACS</a>
+                <!-- <ul id="nav-mobile" class="right hide-on-med-and-down indigo-text text-darken-4"> -->
+                <!--     <li><a href="sass.html" class="indigo-text text-darken-4">Sass</a></li> -->
+                <!--     <li><a href="badges.html" class="indigo-text text-darken-4">Components</a></li> -->
+                <!--     <li><a href="collapsible.html" class="indigo-text text-darken-4">JavaScript</a></li> -->
+                <!-- </ul> -->
+            </div>
+        </nav>
+        <div class="row">
+            <div class="col s8 offset-s1">
+                <h4 class="card-title">A demo application</h4>
+                <p>This demonstrates a nomad raw_exec job</p>
+                <p>All of the contents of the application are run from a single binary</p>
+                <p>{{.Response}}</p>
+            </div>
+            <div class="col s8 offset-s1">
+                <div class="card blue lighten-5">
+                    <div class="card-content grey-text text-darken-4">
+                        <span class="card-title">Greeting Client Job</span>
+                        <p>
+                            job "greeting-client" {<br>
+                            &emsp;datacenters = ["MACS Sandbox"]<br>
+                            &emsp;type = "service"<br>
+                            &emsp;<br>
+                            &emsp;group "greeting-client" {<br>
+                            &emsp;&emsp;count = 1<br>
+                            &emsp;&emsp;network {<br>
+                            &emsp;&emsp;&emsp;&emsp;port "http" {<br>
+                            &emsp;&emsp;&emsp;&emsp;static = "8090"<br>
+                            &emsp;&emsp;&emsp;}<br>
+                            &emsp;&emsp;}<br>
+                            &emsp;&emsp;task "greeting-client" {<br>
+                            &emsp;&emsp;&emsp;driver = "raw_exec"<br>
+                            &emsp;&emsp;&emsp;config {<br>
+                            &emsp;&emsp;&emsp;&emsp;command = "/home/user/basic-job/client"<br>
+                            &emsp;&emsp;&emsp;}<br>
+                            &emsp;<br>
+                            &emsp;&emsp;&emsp;resources {<br>
+                            &emsp;&emsp;&emsp;&emsp;cpu = 100<br>
+                            &emsp;&emsp;&emsp;&emsp;memory = 256<br>
+                            &emsp;&emsp;&emsp;}<br>
+                            &emsp;&emsp;<br>
+                            &emsp;&emsp;&emsp;service {<br>
+                            &emsp;&emsp;&emsp;&emsp;name = "greeting"<br>
+                            &emsp;&emsp;&emsp;&emsp;port = "http"<br>
+                            &emsp;&emsp;&emsp;&emsp;check {<br>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;type     = "tcp"<br>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;interval = "2s"<br>
+                            &emsp;&emsp;&emsp;&emsp;&emsp;timeout  = "2s"<br>
+                            &emsp;&emsp;&emsp;&emsp;}<br>
+                            &emsp;&emsp;&emsp;}<br>
+                            &emsp;&emsp;}<br>
+                            &emsp;}<br>
+                            }
+                    </div>
+                    <div class="card-action ">
+                        <a class="teal-text" target="_blank" href="https://www.nomadproject.io/docs/job-specification">nomad job spec</a>
+                        <a class="teal-text" target="_blank" href="https://www.nomadproject.io/docs/commands/job/run">run a job</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="static/js/materialize.min.js"></script>
+    </body>
 </html>
